@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyJijoWalletData.DataAccess;
 using MyJijoWalletData.POCO;
@@ -9,6 +10,7 @@ namespace MyJijoWalletAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class WalletController : ControllerBase
     {
         [HttpPost]
