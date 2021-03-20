@@ -32,7 +32,7 @@ namespace MyJijoWalletAPI
 
             services.AddControllers();
 
-            //for jwt
+            #region JwtAuth
             string myKey = "MyJijo Key for challenge project";
 
             services.AddAuthentication(x =>
@@ -53,6 +53,7 @@ namespace MyJijoWalletAPI
             });
             
             services.AddSingleton<IJWTAuthenticationManager>(new JWT.JWTAuthenticationManager(myKey));
+            #endregion JwtAuth
 
             services.AddSwaggerGen(c =>
             {

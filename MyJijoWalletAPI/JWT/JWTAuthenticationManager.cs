@@ -1,13 +1,12 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using MyJijoWalletData.POCO;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using System.Web.Http;
+
 
 namespace MyJijoWalletAPI.JWT
 {
@@ -21,8 +20,10 @@ namespace MyJijoWalletAPI.JWT
 
         public string Authenticate(Credentials credentials)
         {
-            //TODO connect to db y  validate pass
-            if (credentials.UserName != "belen")
+            MyJijoWalletContext db = new MyJijoWalletContext();
+
+            //I know we should not save pass in db, i need a little more time to implement something better :)
+            if (!db.Users.Where(x => x.UserName == credentials.UserName && x.Password == credentials.Password).Any())
                 return null;
 
             var tokenHandler = new JwtSecurityTokenHandler();
